@@ -26,15 +26,3 @@ type ReducedNews struct {
 }
 
 type ReducedNewsList []ReducedNews
-
-func (n *ReducedNews) ToToon() string {
-	return ToToon(n)
-}
-
-func (n *ReducedNewsList) ToToon() string {
-	return ToToon(n)
-}
-
-func (n *New) ToToon() string {
-	return ToToon(n)
-}
