@@ -18,15 +18,15 @@ type UserBetaTester struct {
 }
 
 type UserCalls struct {
-	ID           int       `gorm:"primaryKey;autoIncrement"`
-	UserEmail    string    `gorm:"not null"`
-	InputTokens  int       `gorm:"not null"`
-	OutputTokens int       `gorm:"not null"`
-	CallType     string    `gorm:"not null"`
-	TotalCalls   int       `gorm:"not null"`
-	UsedModel    string    `gorm:"not null"`
-	CreatedAt    time.Time `gorm:"autoCreateTime"`
-	UpdatedAt    time.Time `gorm:"autoUpdateTime"`
+	ID           int       `json:"id" gorm:"primaryKey;autoIncrement"`
+	UserEmail    string    `json:"user_email" gorm:"not null"`
+	InputTokens  int       `json:"input_tokens" gorm:"not null"`
+	OutputTokens int       `json:"output_tokens" gorm:"not null"`
+	CallType     string    `json:"call_type" gorm:"not null"`
+	TotalCalls   int       `json:"total_calls" gorm:"not null"`
+	UsedModel    string    `json:"used_model" gorm:"not null"`
+	CreatedAt    time.Time `json:"created_at" gorm:"autoCreateTime"`
+	UpdatedAt    time.Time `json:"updated_at" gorm:"autoUpdateTime"`
 }
 
 type UserCallLogsStats struct {
