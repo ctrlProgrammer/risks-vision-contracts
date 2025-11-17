@@ -40,3 +40,18 @@ type UserCalls struct {
 func (u *UserCalls) ToToon() string {
 	return ToToon(u)
 }
+
+type UserCallLogsStats struct {
+	TotalTokens   uint        `json:"total_tokens"`
+	TotalCalls    uint        `json:"total_calls"`
+	GroupedLogs   []UserCalls `json:"grouped_logs"`
+	UnGroupedLogs []UserCalls `json:"un_grouped_logs"`
+}
+
+type UserPlatformStats struct {
+	TotalTokens   uint              `json:"total_tokens"`
+	TotalCalls    uint              `json:"total_calls"`
+	UserCallLogs  UserCallLogsStats `json:"user_call_logs"`
+	User          User              `json:"user"`
+	Subscriptions []Subscription    `json:"subscriptions"`
+}
