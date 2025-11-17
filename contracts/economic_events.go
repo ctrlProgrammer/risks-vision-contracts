@@ -1,4 +1,4 @@
-package economic_events
+package contracts
 
 import "time"
 
