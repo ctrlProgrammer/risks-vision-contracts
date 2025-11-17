@@ -2,6 +2,29 @@ package contracts
 
 import "time"
 
+type User struct {
+	ID             uint   `json:"id" gorm:"primaryKey"`
+	Email          string `json:"email" default:"NULL"`
+	TotalAICalls   int    `json:"total_ai_calls" gorm:"default:0"`
+	SubscriptionID int    `json:"subscription_id" gorm:"default:7"`
+	Wallet         string `json:"wallet" default:"NULL"`
+}
+
+func (u *User) ToToon() string {
+	return ToToon(u)
+}
+
+type UserBetaTester struct {
+	ID        uint      `json:"id" gorm:"primaryKey"`
+	Email     string    `json:"email" default:"NULL"`
+	Wallet    string    `json:"wallet" default:"NULL"`
+	CreatedAt time.Time `json:"created_at" gorm:"autoCreateTime"`
+}
+
+func (u *UserBetaTester) ToToon() string {
+	return ToToon(u)
+}
+
 type UserCalls struct {
 	ID           int       `gorm:"primaryKey;autoIncrement"`
 	UserEmail    string    `gorm:"not null"`
@@ -12,4 +35,8 @@ type UserCalls struct {
 	UsedModel    string    `gorm:"not null"`
 	CreatedAt    time.Time `gorm:"autoCreateTime"`
 	UpdatedAt    time.Time `gorm:"autoUpdateTime"`
+}
+
+func (u *UserCalls) ToToon() string {
+	return ToToon(u)
 }

@@ -25,3 +25,7 @@ type EconomicCalendarEvent struct {
 	CreatedAt             time.Time `json:"created_at,omitempty" gorm:"autoCreateTime"`
 	UpdatedAt             time.Time `json:"updated_at,omitempty" gorm:"autoUpdateTime"`
 }
+
+func (e *EconomicCalendarEvent) ToToon() string {
+	return ToToon(e)
+}
