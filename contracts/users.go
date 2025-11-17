@@ -10,19 +10,11 @@ type User struct {
 	Wallet         string `json:"wallet" default:"NULL"`
 }
 
-func (u *User) ToToon() string {
-	return ToToon(u)
-}
-
 type UserBetaTester struct {
 	ID        uint      `json:"id" gorm:"primaryKey"`
 	Email     string    `json:"email" default:"NULL"`
 	Wallet    string    `json:"wallet" default:"NULL"`
 	CreatedAt time.Time `json:"created_at" gorm:"autoCreateTime"`
-}
-
-func (u *UserBetaTester) ToToon() string {
-	return ToToon(u)
 }
 
 type UserCalls struct {
@@ -35,10 +27,6 @@ type UserCalls struct {
 	UsedModel    string    `gorm:"not null"`
 	CreatedAt    time.Time `gorm:"autoCreateTime"`
 	UpdatedAt    time.Time `gorm:"autoUpdateTime"`
-}
-
-func (u *UserCalls) ToToon() string {
-	return ToToon(u)
 }
 
 type UserCallLogsStats struct {
