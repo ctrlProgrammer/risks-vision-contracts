@@ -13,7 +13,7 @@ type RVAsset struct {
 	PriceProvider  string    `json:"price_provider" gorm:"not null"`
 	Logo           string    `json:"logo" gorm:"not null"`
 	ProviderTarget string    `json:"provider_target" gorm:"not null"`
-	Blacklist      bool      `json:"blacklisted" gorm:"default:false"`
+	Blacklist      bool      `json:"blacklist" gorm:"default:false"`
 	CreatedAt      time.Time `json:"created_at" gorm:"autoCreateTime"`
 	UpdatedAt      time.Time `json:"updated_at" gorm:"autoUpdateTime"`
 }
