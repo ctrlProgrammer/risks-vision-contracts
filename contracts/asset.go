@@ -23,8 +23,8 @@ func (RVAsset) TableName() string {
 }
 
 type RVAssetOHLCV struct {
-	Time   time.Time `json:"time" gorm:"not null"`
-	Symbol string    `json:"symbol" gorm:"not null"`
+	Time   time.Time `json:"time" gorm:"primaryKey;not null"`
+	Symbol string    `json:"symbol" gorm:"primaryKey;not null"`
 	Open   float64   `json:"open" gorm:"not null"`
 	High   float64   `json:"high" gorm:"not null"`
 	Low    float64   `json:"low" gorm:"not null"`
