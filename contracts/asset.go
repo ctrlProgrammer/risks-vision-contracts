@@ -21,3 +21,17 @@ type RVAsset struct {
 func (RVAsset) TableName() string {
 	return "assets"
 }
+
+type RVAssetOHLCV struct {
+	Time   time.Time `json:"time" gorm:"not null"`
+	Symbol string    `json:"symbol" gorm:"not null"`
+	Open   float64   `json:"open" gorm:"not null"`
+	High   float64   `json:"high" gorm:"not null"`
+	Low    float64   `json:"low" gorm:"not null"`
+	Close  float64   `json:"close" gorm:"not null"`
+	Volume float64   `json:"volume" gorm:"not null"`
+}
+
+func (RVAssetOHLCV) TableName() string {
+	return "assets_ohlcv"
+}
