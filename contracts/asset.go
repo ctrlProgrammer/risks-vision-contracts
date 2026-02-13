@@ -23,13 +23,14 @@ func (RVAsset) TableName() string {
 }
 
 type RVAssetOHLCV struct {
-	Time   string  `json:"time" gorm:"primaryKey;not null"`
-	Symbol string  `json:"symbol" gorm:"primaryKey;not null"`
-	Open   float64 `json:"open" gorm:"not null"`
-	High   float64 `json:"high" gorm:"not null"`
-	Low    float64 `json:"low" gorm:"not null"`
-	Close  float64 `json:"close" gorm:"not null"`
-	Volume float64 `json:"volume" gorm:"not null"`
+	// Use time.Time for native Postgres TIMESTAMPTZ support
+	Time   time.Time `json:"time" gorm:"primaryKey;column:time;not null"`
+	Symbol string    `json:"symbol" gorm:"primaryKey;column:symbol;not null"`
+	Open   float64   `json:"open" gorm:"column:open;not null"`
+	High   float64   `json:"high" gorm:"column:high;not null"`
+	Low    float64   `json:"low" gorm:"column:low;not null"`
+	Close  float64   `json:"close" gorm:"column:close;not null"`
+	Volume float64   `json:"volume" gorm:"column:volume;not null"`
 }
 
 func (RVAssetOHLCV) TableName() string {
