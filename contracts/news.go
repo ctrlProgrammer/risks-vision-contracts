@@ -77,7 +77,7 @@ type NewsDailyMarketReport struct {
 
 // NewsSentimentScore represents the sentiment analysis result for a specific asset at a given time.
 type NewsSentimentScore struct {
-	ID             uuid.UUID `json:"id" gorm:"type:uuid;primaryKey;default:uuid_generate_v4()"`
+	ID             uuid.UUID `json:"id" gorm:"type:uuid;primaryKey;default:gen_random_uuid()"`
 	Symbol         string    `json:"symbol" gorm:"type:varchar(10);not null" description:"Asset ticker symbol (e.g., 'AAPL', 'BTC')"`
 	AssetName      string    `json:"asset_name" gorm:"type:varchar(100)" description:"Full asset name (e.g., 'Apple Inc.')"`
 	SentimentIndex float64   `json:"sentiment_index" gorm:"not null" description:"Calculated sentiment score from -1.0 to 1.0"`
