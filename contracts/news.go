@@ -54,11 +54,12 @@ type NewsReportAnalysis struct {
 }
 
 type NewsDailyMarketReport struct {
-	ID        int                `json:"id" gorm:"primaryKey;autoIncrement"`
-	Date      string             `json:"date"`
-	Report    NewsReportAnalysis `json:"report"`
-	UserEmail string             `json:"user_email" gorm:"not null"`
-	Market    string             `json:"market" gorm:"not null"`
-	CreatedAt time.Time          `json:"created_at" gorm:"autoCreateTime"`
-	UpdatedAt time.Time          `json:"updated_at" gorm:"autoUpdateTime"`
+	ID          int                `json:"id" gorm:"primaryKey;autoIncrement"`
+	Date        string             `json:"date"`
+	Report      NewsReportAnalysis `json:"report"`
+	RiskProfile string             `json:"risk_profile" description:"The risk profile of the user." required:"true"`
+	UserEmail   string             `json:"user_email" gorm:"not null"`
+	Market      string             `json:"market" gorm:"not null"`
+	CreatedAt   time.Time          `json:"created_at" gorm:"autoCreateTime"`
+	UpdatedAt   time.Time          `json:"updated_at" gorm:"autoUpdateTime"`
 }
