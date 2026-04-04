@@ -55,7 +55,7 @@ type NewsReportAnalysis struct {
 
 type NewsDailyMarketReport struct {
 	ID        int                `json:"id" gorm:"primaryKey;autoIncrement"`
-	Date      time.Time          `json:"date"`
+	Date      string             `json:"date"`
 	Report    NewsReportAnalysis `json:"report"`
 	UserEmail string             `json:"user_email" gorm:"not null"`
 	Market    string             `json:"market" gorm:"not null"`
