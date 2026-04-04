@@ -1,6 +1,10 @@
 package contracts
 
-import "time"
+import (
+	"time"
+
+	"github.com/google/uuid"
+)
 
 type New struct {
 	ID             uint      `gorm:"primaryKey;autoIncrement" json:"id,omitempty"`
@@ -67,4 +71,20 @@ type NewsDailyMarketReport struct {
 	Market      string             `json:"market" gorm:"not null"`
 	CreatedAt   time.Time          `json:"created_at" gorm:"autoCreateTime"`
 	UpdatedAt   time.Time          `json:"updated_at" gorm:"autoUpdateTime"`
+}
+
+// News sentiment score table
+
+// NewsSentimentScore represents the sentiment analysis result for a specific asset at a given time.
+type NewsSentimentScore struct {
+	ID             uuid.UUID `json:"id" gorm:"type:uuid;primaryKey;default:uuid_generate_v4()"`
+	Symbol         string    `json:"symbol" gorm:"type:varchar(10);not null" description:"Asset ticker symbol (e.g., 'AAPL', 'BTC')"`
+	AssetName      string    `json:"asset_name" gorm:"type:varchar(100)" description:"Full asset name (e.g., 'Apple Inc.')"`
+	SentimentIndex float64   `json:"sentiment_index" gorm:"not null" description:"Calculated sentiment score from -1.0 to 1.0"`
+	SentimentLabel string    `json:"sentiment_label" gorm:"type:varchar(20)" description:"Categorical label for the sentiment — Bullish, Bearish, Neutral"`
+	AvgIntensity   float64   `json:"avg_intensity" description:"Average intensity score (1-5) from analyzed news"`
+	MaxUrgency     int       `json:"max_urgency" description:"Highest urgency value detected in this time window"`
+	NewsCount      int       `json:"news_count" description:"Number of news articles analyzed"`
+	AvgConfidence  float64   `json:"avg_confidence" description:"Average confidence level from contributing models/agents"`
+	CreatedAt      time.Time `json:"created_at" gorm:"autoCreateTime" description:"When this record was created"`
 }
