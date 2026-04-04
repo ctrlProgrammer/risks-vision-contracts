@@ -3,16 +3,21 @@ package contracts
 import "time"
 
 type New struct {
-	ID         uint      `gorm:"primaryKey;autoIncrement" json:"id,omitempty"`
-	Asset      string    `json:"asset"`
-	Symbol     string    `json:"symbol"`
-	Info       string    `json:"info"`
-	Sentiment  string    `json:"sentiment"`
-	Title      string    `json:"title"`
-	Source     string    `json:"source"`
-	Type       string    `json:"type"`
-	SourceLink string    `json:"source_link"`
-	CreatedAt  time.Time `json:"created_at,omitempty" gorm:"autoCreateTime"`
+	ID             uint      `gorm:"primaryKey;autoIncrement" json:"id,omitempty"`
+	Asset          string    `json:"asset"`
+	Symbol         string    `json:"symbol"`
+	Info           string    `json:"info"`
+	Sentiment      string    `json:"sentiment"`
+	SentimentScore float64   `json:"sentiment_score" description:"Numeric score from -1.0 to 1.0. This is the score of the news based on the market perspective." required:"true"`
+	Intensity      int       `json:"intensity" description:"Strength of the news impact from 1 to 5. Based on the language of the news." required:"true"`
+	Confidence     float64   `json:"confidence" description:"AI confidence in the analysis from 0 to 1. AI confidence is the security of the sentiment score based on the language of the new and the intensity of the new" required:"true"`
+	ImpactScope    string    `json:"impact_scope" description:"Reach: asset, sector, or global." required:"true"`
+	Urgency        int       `json:"urgency" description:"Time sensitivity from 1 (low) to 5 (critical). 1 is if the new is informative/historical, 5 is if the new is a critical event that requires immediate action." required:"true"`
+	Title          string    `json:"title"`
+	Source         string    `json:"source"`
+	Type           string    `json:"type"`
+	SourceLink     string    `json:"source_link"`
+	CreatedAt      time.Time `json:"created_at,omitempty" gorm:"autoCreateTime"`
 }
 
 func (New) TableName() string {
