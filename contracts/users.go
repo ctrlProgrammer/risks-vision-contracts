@@ -3,11 +3,19 @@ package contracts
 import "time"
 
 type User struct {
-	ID             uint   `json:"id" gorm:"primaryKey"`
-	Email          string `json:"email" default:"NULL"`
-	TotalAICalls   int    `json:"total_ai_calls" gorm:"default:0"`
-	SubscriptionID int    `json:"subscription_id" gorm:"default:7"`
-	Wallet         string `json:"wallet" default:"NULL"`
+	ID                  uint      `json:"id" gorm:"primaryKey"`
+	Email               string    `json:"email" default:"NULL"`
+	TotalAICalls        int       `json:"total_ai_calls" gorm:"default:0"`
+	SubscriptionID      int       `json:"subscription_id" gorm:"default:7"`
+	Wallet              string    `json:"wallet" default:"NULL"`
+	Language            string    `json:"language" default:"en"`
+	FavoriteMarkets     []string  `json:"favorite_markets" gorm:"type:jsonb"`
+	FavoriteAssets      []string  `json:"favorite_assets" gorm:"type:jsonb"`
+	RiskLevel           string    `json:"risk_level" default:"medium"`       // low is dont use to much risk, medium is use some risk, high is use a lot of risk
+	ExperienceLevel     string    `json:"experience_level" default:"medium"` // beginner, intermediate, advanced
+	OnboardingCompleted bool      `json:"onboarding_completed" gorm:"default:false"`
+	CreatedAt           time.Time `json:"created_at" gorm:"autoCreateTime"`
+	UpdatedAt           time.Time `json:"updated_at" gorm:"autoUpdateTime"`
 }
 
 type UserBetaTester struct {
