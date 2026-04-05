@@ -88,3 +88,17 @@ type NewsSentimentScore struct {
 	AvgConfidence  float64   `json:"avg_confidence" description:"Average confidence level from contributing models/agents"`
 	CreatedAt      time.Time `json:"created_at" gorm:"autoCreateTime" description:"When this record was created"`
 }
+
+// NewsIndustrySentimentScore represents sentiment scores for a whole industry/sector at a specific moment, including metadata and driver information.
+type NewsIndustrySentimentScore struct {
+	ID              uuid.UUID `json:"id" gorm:"type:uuid;primaryKey;default:gen_random_uuid()" description:"Unique identifier for this industry sentiment score record."`
+	IndustryName    string    `json:"industry_name" gorm:"type:varchar(100);not null" description:"The industry or sector for which the sentiment score applies (e.g., 'Semiconductors', 'Cryptocurrency')."`
+	SectorType      string    `json:"sector_type" gorm:"type:varchar(50);not null" description:"The broad market sector classification, such as 'Equities', 'Crypto', 'Commodities', etc."`
+	SentimentIndex  float64   `json:"sentiment_index" description:"Calculated sentiment score from -1.0 (bearish) to 1.0 (bullish), representing the overall news sentiment for the industry."`
+	SentimentLabel  string    `json:"sentiment_label" gorm:"type:varchar(20)" description:"Categorical label for the sentiment — Bullish, Bearish, Neutral."`
+	TopDriverSymbol string    `json:"top_driver_symbol" gorm:"type:varchar(20)" description:"Asset symbol or ticker that most strongly influenced the sentiment index (e.g., 'TSLA', 'BTC')."`
+	TopDriverName   string    `json:"top_driver_name" gorm:"type:varchar(100)" description:"Full name or description of the asset or news item driving the sentiment."`
+	NewsCount       int       `json:"news_count" description:"Number of news articles or events analyzed for this industry in this score aggregation."`
+	AvgConfidence   float64   `json:"avg_confidence" description:"Average confidence (0-1.0) in the computed sentiment from contributing models or agents."`
+	CreatedAt       time.Time `json:"created_at" gorm:"autoCreateTime" description:"Timestamp when this score was created."`
+}
