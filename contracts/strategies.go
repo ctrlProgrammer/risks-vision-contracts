@@ -27,6 +27,7 @@ type StrategyBuild struct {
 	ProcessingCode string          `json:"processing_code" gorm:"type:text;not null" description:"Executable or DSL text used to process the initial market/strategy data"`
 	UserPrompt     string          `json:"user_prompt" gorm:"type:text" description:"The user prompt text saved when this strategy version was created or refined"`
 	Results        json.RawMessage `json:"results,omitempty" gorm:"type:jsonb" description:"Structured output of the strategy run (metrics, signals, etc.)"`
+	ProcessID      *string         `json:"process_id,omitempty" gorm:"size:768;index"`
 	CreatedAt      time.Time       `json:"created_at,omitempty" gorm:"autoCreateTime"`
 	UpdatedAt      time.Time       `json:"updated_at,omitempty" gorm:"autoUpdateTime"`
 }
