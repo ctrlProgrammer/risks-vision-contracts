@@ -21,15 +21,16 @@ func (Strategy) TableName() string {
 
 // StrategyBuild is a versioned snapshot of a strategy (processing code, prompt, and computed output).
 type StrategyBuild struct {
-	ID             uint            `gorm:"primaryKey;autoIncrement" json:"id,omitempty"`
-	StrategyID     uint            `json:"strategy_id" gorm:"not null;index;uniqueIndex:idx_strategy_build_version" description:"Parent strategy this build belongs to"`
-	VersionNumber  int             `json:"version_number" gorm:"not null;uniqueIndex:idx_strategy_build_version" description:"Monotonic version for this strategy (unique per strategy_id)"`
-	ProcessingCode string          `json:"processing_code" gorm:"type:text;not null" description:"Executable or DSL text used to process the initial market/strategy data"`
-	UserPrompt     string          `json:"user_prompt" gorm:"type:text" description:"The user prompt text saved when this strategy version was created or refined"`
-	Results        json.RawMessage `json:"results,omitempty" gorm:"type:jsonb" description:"Structured output of the strategy run (metrics, signals, etc.)"`
-	ProcessID      *string         `json:"process_id,omitempty" gorm:"size:768;index"`
-	CreatedAt      time.Time       `json:"created_at,omitempty" gorm:"autoCreateTime"`
-	UpdatedAt      time.Time       `json:"updated_at,omitempty" gorm:"autoUpdateTime"`
+	ID              uint            `gorm:"primaryKey;autoIncrement" json:"id,omitempty"`
+	StrategyID      uint            `json:"strategy_id" gorm:"not null;index;uniqueIndex:idx_strategy_build_version" description:"Parent strategy this build belongs to"`
+	VersionNumber   int             `json:"version_number" gorm:"not null;uniqueIndex:idx_strategy_build_version" description:"Monotonic version for this strategy (unique per strategy_id)"`
+	ProcessingCode  string          `json:"processing_code" gorm:"type:text;not null" description:"Executable or DSL text used to process the initial market/strategy data"`
+	UserPrompt      string          `json:"user_prompt" gorm:"type:text" description:"The user prompt text saved when this strategy version was created or refined"`
+	Results         json.RawMessage `json:"results,omitempty" gorm:"type:jsonb" description:"Structured output of the strategy run (metrics, signals, etc.)"`
+	LastExplanation string          `json:"last_explanation,omitempty" gorm:"type:text" description:"The last explanation of the strategy run"`
+	ProcessID       *string         `json:"process_id,omitempty" gorm:"size:768;index"`
+	CreatedAt       time.Time       `json:"created_at,omitempty" gorm:"autoCreateTime"`
+	UpdatedAt       time.Time       `json:"updated_at,omitempty" gorm:"autoUpdateTime"`
 }
 
 func (StrategyBuild) TableName() string {
