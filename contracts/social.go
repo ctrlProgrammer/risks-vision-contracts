@@ -24,3 +24,18 @@ type SocialScheduledPost struct {
 func (SocialScheduledPost) TableName() string {
 	return "social_posting_scheduler"
 }
+
+type SocialTemplate struct {
+	ID             uint      `json:"id" gorm:"primaryKey;autoIncrement"`
+	TemplateName   string    `json:"template_name" gorm:"size:128;not null"`
+	TemplateText   string    `json:"template_text" gorm:"type:text;not null"`
+	SocialNetwork  string    `json:"social_network" gorm:"size:32;not null;default:x"`
+	TargetLanguage string    `json:"target_language" gorm:"size:8;not null;default:en"`
+	CreatedAt      time.Time `json:"created_at" gorm:"autoCreateTime"`
+	UpdatedAt      time.Time `json:"updated_at" gorm:"autoUpdateTime"`
+	Version        int       `json:"version" gorm:"not null;default:1"`
+}
+
+func (SocialTemplate) TableName() string {
+	return "social_templates"
+}
