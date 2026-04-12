@@ -45,6 +45,7 @@ type TokenBundleOrder struct {
 	BundleSlug         string    `json:"bundle_slug" gorm:"index;size:64;not null"`
 	Tokens             int       `json:"tokens" gorm:"not null"`
 	AmountInCents      int64     `json:"amount_in_cents" gorm:"not null"`
+	AmountUSDCents     int64     `json:"amount_usd_cents" gorm:"column:amount_usd_cents;not null;default:0"`
 	Currency           string    `json:"currency" gorm:"size:8;not null;default:COP"`
 	Status             string    `json:"status" gorm:"size:24;not null;default:pending"` // pending, paid, failed
 	WompiTransactionID string    `json:"wompi_transaction_id" gorm:"size:64"`
