@@ -9,7 +9,7 @@ type Subscription struct {
 	Price         float64  `json:"price" gorm:"default:0"`
 	WhatsIncluded []string `json:"whats_included" gorm:"type:jsonb"`
 	Limitations   []string `json:"limitations" gorm:"type:jsonb"`
-	FrontName     *string  `json:"front_name" gorm:"not null"`
+	FrontName     *string  `json:"front_name" gorm:""`
 }
 
 func (s *Subscription) ToToon() string {
