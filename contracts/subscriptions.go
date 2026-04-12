@@ -18,6 +18,8 @@ func (s *Subscription) ToToon() string {
 
 type TokenBundles struct {
 	ID             uint      `json:"id" gorm:"primaryKey"`
+	Name           string    `json:"name" gorm:"not null"`
+	Description    string    `json:"description" gorm:"type:text"`
 	AmountOfTokens int       `json:"amount_of_tokens" gorm:"default:0"`
 	Price          float64   `json:"price" gorm:"default:0"`
 	CreatedAt      time.Time `json:"created_at" gorm:"autoCreateTime"`
