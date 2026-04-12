@@ -37,3 +37,32 @@ type Bundle struct {
 func (Bundle) TableName() string {
 	return "token_bundles"
 }
+
+type TokenBundleOrder struct {
+	ID                 uint      `json:"id" gorm:"primaryKey"`
+	Reference          string    `json:"reference" gorm:"uniqueIndex;size:128;not null"`
+	UserEmail          string    `json:"user_email" gorm:"index;not null;size:256"`
+	BundleSlug         string    `json:"bundle_slug" gorm:"index;size:64;not null"`
+	Tokens             int       `json:"tokens" gorm:"not null"`
+	AmountInCents      int64     `json:"amount_in_cents" gorm:"not null"`
+	Currency           string    `json:"currency" gorm:"size:8;not null;default:COP"`
+	Status             string    `json:"status" gorm:"size:24;not null;default:pending"` // pending, paid, failed
+	WompiTransactionID string    `json:"wompi_transaction_id" gorm:"size:64"`
+	CreatedAt          time.Time `json:"created_at" gorm:"autoCreateTime"`
+	UpdatedAt          time.Time `json:"updated_at" gorm:"autoUpdateTime"`
+}
+
+func (TokenBundleOrder) TableName() string {
+	return "token_bundle_orders"
+}
+
+// UserTokenWallet stores purchasable AI tokens (separate from usage call logs).
+type UserTokenWallet struct {
+	UserEmail    string    `json:"user_email" gorm:"primaryKey;size:256"`
+	TokenBalance int       `json:"token_balance" gorm:"not null;default:0"`
+	UpdatedAt    time.Time `json:"updated_at" gorm:"autoUpdateTime"`
+}
+
+func (UserTokenWallet) TableName() string {
+	return "user_token_wallets"
+}
