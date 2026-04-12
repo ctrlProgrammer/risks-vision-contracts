@@ -31,6 +31,7 @@ type SocialTemplate struct {
 	TemplateText   string    `json:"template_text" gorm:"type:text;not null"`
 	SocialNetwork  string    `json:"social_network" gorm:"size:32;not null;default:x"`
 	TargetLanguage string    `json:"target_language" gorm:"size:8;not null;default:en"`
+	Context        []string  `json:"context" gorm:"type:jsonb"`
 	CreatedAt      time.Time `json:"created_at" gorm:"autoCreateTime"`
 	UpdatedAt      time.Time `json:"updated_at" gorm:"autoUpdateTime"`
 	Version        int       `json:"version" gorm:"not null;default:1"`
