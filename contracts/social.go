@@ -16,6 +16,9 @@ type SocialScheduledPost struct {
 	Version1           string          `json:"version_1" gorm:"column:version_1;type:text"`
 	Version2           string          `json:"version_2" gorm:"column:version_2;type:text"`
 	Version3           string          `json:"version_3" gorm:"column:version_3;type:text"`
+	ImageUrl1          string          `json:"image_url_1" gorm:"column:image_url_1;type:text"`
+	ImageUrl2          string          `json:"image_url_2" gorm:"column:image_url_2;type:text"`
+	ImageUrl3          string          `json:"image_url_3" gorm:"column:image_url_3;type:text"`
 	PerformanceMetrics json.RawMessage `json:"performance_metrics,omitempty" gorm:"type:jsonb"`
 	State              string          `json:"state" gorm:"size:32;not null;index"`
 	PublishedAt        *time.Time      `json:"published_at,omitempty"`
@@ -26,15 +29,16 @@ func (SocialScheduledPost) TableName() string {
 }
 
 type SocialTemplate struct {
-	ID             uint      `json:"id" gorm:"primaryKey;autoIncrement"`
-	TemplateName   string    `json:"template_name" gorm:"size:128;not null"`
-	TemplateText   string    `json:"template_text" gorm:"type:text;not null"`
-	SocialNetwork  string    `json:"social_network" gorm:"size:32;not null;default:x"`
-	TargetLanguage string    `json:"target_language" gorm:"size:8;not null;default:en"`
-	Context        []string  `json:"context" gorm:"type:jsonb"`
-	CreatedAt      time.Time `json:"created_at" gorm:"autoCreateTime"`
-	UpdatedAt      time.Time `json:"updated_at" gorm:"autoUpdateTime"`
-	Version        int       `json:"version" gorm:"not null;default:1"`
+	ID               uint      `json:"id" gorm:"primaryKey;autoIncrement"`
+	TemplateName     string    `json:"template_name" gorm:"size:128;not null"`
+	TemplateText     string    `json:"template_text" gorm:"type:text;not null"`
+	SocialNetwork    string    `json:"social_network" gorm:"size:32;not null;default:x"`
+	TargetLanguage   string    `json:"target_language" gorm:"size:8;not null;default:en"`
+	ImageDescription string    `json:"image_description" gorm:"type:text"`
+	Context          []string  `json:"context" gorm:"type:jsonb"`
+	CreatedAt        time.Time `json:"created_at" gorm:"autoCreateTime"`
+	UpdatedAt        time.Time `json:"updated_at" gorm:"autoUpdateTime"`
+	Version          int       `json:"version" gorm:"not null;default:1"`
 }
 
 func (SocialTemplate) TableName() string {
